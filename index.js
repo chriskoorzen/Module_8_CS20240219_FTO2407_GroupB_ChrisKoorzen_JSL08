@@ -32,3 +32,32 @@
 // - The `getBranchInfo` method allows us to retrieve the branch information from the singleton instance.
 // - We demonstrate the Singleton pattern by creating two instances (`branchA` and `branchB`) and show that they both point to the same instance,
 //   ensuring that there is only one set of branch information throughout the application.
+
+
+class BankBranch {
+    
+    constructor(branchInfo){
+        // Check if dynamically created property does not exist
+        if (BankBranch.singleton === undefined){
+
+            // Init instance with variables
+            this.branchInfo = branchInfo;
+
+            // Dynamically assign property to class definition
+            // Set as this newly created instance
+            // (accessed via the "this" variable)
+            BankBranch.singleton = this;
+        }
+
+        // Override the default return value of the constructor function
+        // (which is the newly created "this" object)
+        // and return our dynamically assigned property
+        // (the first and only instance of this class)
+        return BankBranch.singleton;
+    }
+
+    getBranchInfo(){
+        return this.branchInfo;
+    }
+}
+
