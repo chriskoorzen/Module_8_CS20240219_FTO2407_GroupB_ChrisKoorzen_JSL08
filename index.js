@@ -62,3 +62,17 @@ class BankBranch {
     }
 }
 
+
+console.log("Attempting to create branch 'New York'");
+const branchA = new BankBranch("New York");
+console.log("This is branch A:", branchA.getBranchInfo());
+
+
+console.log("Attempting to create branch 'Amsterdam'");
+const branchB = new BankBranch("Amsterdam");
+console.log("This is branch B:", branchB.getBranchInfo());
+
+console.log();
+console.log("Branch A is the same as Branch B", branchA===branchB);
+console.log("There is only BankBranch object in this program environment", branchA===branchB);
+console.log("We have successfully implemented a Singleton pattern", branchA===branchB);
