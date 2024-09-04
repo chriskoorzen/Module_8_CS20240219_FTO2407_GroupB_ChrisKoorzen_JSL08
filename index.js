@@ -35,18 +35,19 @@
 
 
 class BankBranch {
-    
+
+    #branchInfo;            // Define properties as private to prevent direct access
+
     constructor(branchInfo){
         // Check if dynamically created property does not exist
         if (BankBranch.singleton === undefined){
 
             // Init instance with variables
-            this.branchInfo = branchInfo;
+            this.#branchInfo = branchInfo;
 
-            // Dynamically assign property to class definition
-            // Set as this newly created instance
-            // (accessed via the "this" variable)
-            BankBranch.singleton = this;
+            // Dynamically assign property to class definition -> Set as this newly created instance.
+            // Freeze this object to prevent any modifications at runtime.
+            BankBranch.singleton = Object.freeze(this);
         }
 
         // Override the default return value of the constructor function
@@ -57,7 +58,7 @@ class BankBranch {
     }
 
     getBranchInfo(){
-        return this.branchInfo;
+        return this.#branchInfo;
     }
 }
 
