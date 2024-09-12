@@ -3,7 +3,12 @@
 
 class BankBranch {
 
-    #branchInfo;            // Define properties as private to prevent direct access
+    // Define properties as private to prevent direct access.
+    // The advantage of this approach is that we are still able to
+    // modify properties even after the object is "frozen",
+    // but only with functions defined on the class itself - 
+    // it cannot be changed or tampered with from outside at runtime.
+    #branchInfo;
 
     constructor(branchInfo){
         // Check if dynamically created property does not exist
