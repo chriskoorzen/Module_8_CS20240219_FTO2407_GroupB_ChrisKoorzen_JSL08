@@ -8,14 +8,16 @@ class BankBranch {
     // modify properties even after the object is "frozen",
     // but only with functions defined on the class itself - 
     // it cannot be changed or tampered with from outside at runtime.
-    #branchInfo;
+    #branchName;
+    #branchTel;
 
-    constructor(branchInfo){
+    constructor(branchName, branchTel){
         // Check if dynamically created property does not exist
         if (BankBranch.singleton === undefined){
 
             // Init instance with variables
-            this.#branchInfo = branchInfo;
+            this.#branchName = branchName;
+            this.#branchTel = branchTel;
 
             // Dynamically assign property to class definition -> Set as this newly created instance.
             // Freeze this object to prevent any modifications at runtime.
@@ -35,7 +37,12 @@ class BankBranch {
     }
 
     getBranchInfo(){
-        return this.#branchInfo;
+        return {name: this.#branchName, tel: this.#branchTel};
+    }
+
+    updateTel(newTel, isAuth=false){
+        if (isAuth) { this.#branchTel = newTel; }
+        else { console.log("Error - Security Warning: Current user not authed to update Tel info.") };
     }
 }
 
