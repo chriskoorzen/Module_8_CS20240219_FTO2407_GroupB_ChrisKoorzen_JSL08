@@ -47,16 +47,57 @@ class BankBranch {
 }
 
 
-console.log("Attempting to create branch 'New York'");
-const branchA = new BankBranch("New York");
+// Attempt to create multiple instances
+console.log("\n\n", "----- Attempt to create multiple instances -----");
+console.log("Attempting to create branch 'New York' with Tel: 555-5000");
+const branchA = new BankBranch("New York", "555-5000");
 console.log("This is branch A:", branchA.getBranchInfo());
 
-
-console.log("Attempting to create branch 'Amsterdam'");
-const branchB = new BankBranch("Amsterdam");
+console.log("Attempting to create branch 'Amsterdam' with Tel: 420-6969");
+const branchB = new BankBranch("Amsterdam", "420-6969");
 console.log("This is branch B:", branchB.getBranchInfo());
 
-console.log();
+
+// Test Branch Identities
+console.log("\n\n", "----- Test Branch Identities -----");
 console.log("Branch A is the same as Branch B", branchA===branchB);
 console.log("There is only BankBranch object in this program environment", branchA===branchB);
 console.log("We have successfully implemented a Singleton pattern", branchA===branchB);
+
+
+// Attempt to directly modify data
+console.log("\n\n", "----- Attempt to directly modify data -----");
+console.log("Branch details before direct modification attempts:", branchA.getBranchInfo());
+try {
+    branchA.branchName = "Haha, hacked your name.";
+} catch (error){ console.log(error); };
+
+try {
+    branchA.branchTel = "Oops, new number";
+} catch (error){ console.log(error); };
+
+console.log("Branch details after direct modification attempts:", branchA.getBranchInfo());
+
+
+// Modify data through defined functions
+console.log("\n\n", "----- Modify data through defined functions -----");
+console.log("Branch details before unauthorized mod attempt:", branchA.getBranchInfo());
+let auth = false;
+console.log("User is authenticated:", auth);
+branchA.updateTel("777-7000", auth);
+console.log("Branch details after unauthorized mod attempt:", branchA.getBranchInfo());
+
+console.log();
+auth = true;
+console.log("User is authenticated:", auth);
+branchA.updateTel("777-7000", auth);
+console.log("Branch details after authorized mod attempt:", branchA.getBranchInfo());
+console.log("branchA is still same as branchB after update:", branchA===branchB);
+console.log("See for yourself:", branchB.getBranchInfo());
+
+
+// Finally, see if object really is frozen, preventing modifications
+console.log("\n\n", "----- Finally, see if object really is frozen, preventing modifications -----");
+console.log("Object branchA isFrozen:", Object.isFrozen(branchB));
+console.log("Object branchB isFrozen:", Object.isFrozen(branchA));
+console.log("Object BankBranch isFrozen:", Object.isFrozen(BankBranch));
