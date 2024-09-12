@@ -15,6 +15,11 @@ class BankBranch {
             // Dynamically assign property to class definition -> Set as this newly created instance.
             // Freeze this object to prevent any modifications at runtime.
             BankBranch.singleton = Object.freeze(this);
+
+            // In addition, freeze the BankBranch class itself, so that
+            // it may not be tampered with eg.
+            // reassigning the "singleton" property.
+            Object.freeze(BankBranch);
         }
 
         // Override the default return value of the constructor function
